@@ -28,8 +28,8 @@ const FAQ = () => {
       answer: "Yes! We offer professional field installation services for all fabricated components. Our team handles on-site assembly and installation, ensuring everything is completed safely, on schedule, and to code."
     },
     {
-      question: "Are your welders certified?",
-      answer: "Yes, all our welding is performed by certified professionals with expertise in MIG, TIG, and structural welding techniques."
+      question: "Who performs the welding work?",
+      answer: "All our welding is performed by experienced professionals with expertise in MIG, TIG, and structural welding techniques."
     },
     {
       question: "Do you work with architects and contractors?",

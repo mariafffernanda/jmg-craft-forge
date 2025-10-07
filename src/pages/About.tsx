@@ -10,12 +10,12 @@ const About = () => {
     {
       icon: CheckCircle,
       title: "Safety & Compliance",
-      description: "OSHA-certified operations with strict adherence to building codes.",
+      description: "OSHA-compliant operations with strict adherence to building codes.",
     },
     {
       icon: Award,
-      title: "Certified Craftsmanship",
-      description: "Our welders are certified professionals committed to excellence.",
+      title: "Expert Craftsmanship",
+      description: "Our team brings decades of experience and commitment to excellence.",
     },
     {
       icon: Users,
@@ -38,15 +38,27 @@ const About = () => {
         </div>
       </section>
 
-      {/* Company Overview */}
+      {/* About Us */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold mb-8 uppercase">OUR MISSION</h2>
+            <h2 className="text-4xl font-bold mb-8 uppercase">ABOUT US</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              JMG Custom Metal Shop is a full-service metal fabrication company located in Miami, Florida. 
+              With decades of combined experience, we've built our reputation on delivering high-quality 
+              metalwork for contractors, architects, developers, and property owners across South Florida.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              Our team specializes in structural steel fabrication, custom railings, metal staircases, 
+              CNC cutting, welding, and professional field installation. We pride ourselves on attention 
+              to detail, safety, and our commitment to bringing your vision to life with precision and care.
+            </p>
+            
+            <h2 className="text-4xl font-bold mb-8 uppercase mt-12">OUR MISSION</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               To be South Florida's premier provider of comprehensive metal fabrication solutions, 
               delivering precision, safety, and lasting quality in every project. JMG combines advanced 
-              technology with certified craftsmanship to exceed expectations in structural steel, 
+              technology with expert craftsmanship to exceed expectations in structural steel, 
               architectural metalwork, and on-site installation.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -103,7 +115,7 @@ const About = () => {
                 <div>
                   <h3 className="text-2xl font-bold mb-2 uppercase">Fabrication</h3>
                   <p className="text-muted-foreground">
-                    Advanced CNC technology and certified welding in our state-of-the-art facility.
+                    Advanced CNC technology and expert welding in our state-of-the-art facility.
                   </p>
                 </div>
               </div>
@@ -132,7 +144,7 @@ const About = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6 uppercase">LEADERSHIP & EXPERTISE</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Led by Jackson Suarez and a team of certified fabricators, JMG Custom Metal Shop brings 
+              Led by Jackson Suarez and a team of experienced fabricators, JMG Custom Metal Shop brings 
               decades of combined experience in precision metal fabrication. Our commitment to continuous 
               training and investment in cutting-edge technology ensures we deliver industry-leading results 
               on every project.

@@ -44,7 +44,7 @@ const Navigation = () => {
               </Link>
             ))}
             <Button asChild variant="default" className="ml-4">
-              <Link to="/contact">REQUEST A QUOTE</Link>
+              <a href="tel:3052185311">GIVE US A CALL</a>
             </Button>
           </div>
 
@@ -78,9 +78,9 @@ const Navigation = () => {
               ))}
               <div className="px-4 pt-2">
                 <Button asChild variant="default" className="w-full">
-                  <Link to="/contact" onClick={() => setIsOpen(false)}>
-                    REQUEST A QUOTE
-                  </Link>
+                  <a href="tel:3052185311" onClick={() => setIsOpen(false)}>
+                    GIVE US A CALL
+                  </a>
                 </Button>
               </div>
             </div>

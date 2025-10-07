@@ -48,8 +48,8 @@ const Footer = () => {
 
           {/* Social Media */}
           <div>
-            <h3 className="text-xl font-bold mb-4 text-accent">FOLLOW US</h3>
-            <div className="flex gap-4">
+            <h3 className="text-xl font-bold mb-4 text-accent">CONNECT WITH US</h3>
+            <div className="flex gap-4 mb-6">
               <a
                 href="https://facebook.com/jmgcustom"
                 target="_blank"
@@ -87,6 +87,15 @@ const Footer = () => {
                 <MessageCircle size={24} />
               </a>
             </div>
+            <a
+              href="https://wa.me/13052185311"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-[#25D366] text-white rounded-lg hover:opacity-90 transition-opacity font-bold"
+            >
+              <MessageCircle size={24} />
+              <span>Chat on WhatsApp</span>
+            </a>
             <p className="mt-6 text-sm italic">
               "Building the Future | Serving Today."
             </p>

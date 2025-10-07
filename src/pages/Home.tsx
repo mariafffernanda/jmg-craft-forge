@@ -9,7 +9,7 @@ import ProjectCard from "@/components/ProjectCard";
 
 const Home = () => {
   const features = [
-    { icon: Award, title: "Certified Craftsmanship", text: "OSHA compliant with certified welders" },
+    { icon: Award, title: "Expert Craftsmanship", text: "OSHA compliant with experienced professionals" },
     { icon: Shield, title: "Safety First", text: "Rigorous safety standards on every project" },
     { icon: CheckCircle, title: "Quality Guaranteed", text: "Precision fabrication built to last" },
     { icon: Clock, title: "On-Time Delivery", text: "Reliable scheduling and installation" },
@@ -33,7 +33,7 @@ const Home = () => {
             Structural Steel | Custom Railings | Metal Staircases | CNC Cutting | Welding & Installation
           </p>
           <p className="text-lg mb-8 text-accent font-semibold">
-            Serving South Florida with Certified Excellence
+            Serving South Florida with Excellence
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="default" className="text-lg px-8">
@@ -58,7 +58,7 @@ const Home = () => {
             <p className="text-lg text-muted-foreground leading-relaxed">
               JMG Custom Metal Shop delivers comprehensive metal fabrication solutions with precision, 
               safety, and lasting quality. From CAD detailing to on-site installation, we combine advanced 
-              technology with certified craftsmanship to exceed expectations in structural steel, 
+              technology with expert craftsmanship to exceed expectations in structural steel, 
               architectural metalwork, and custom fabrication.
             </p>
           </div>

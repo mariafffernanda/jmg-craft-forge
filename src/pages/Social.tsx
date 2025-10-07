@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
 
 const Social = () => {
   return (
@@ -45,6 +45,26 @@ const Social = () => {
             >
               <Linkedin size={32} />
               <span className="font-bold text-lg">Follow on LinkedIn</span>
+            </a>
+            <a
+              href="https://wa.me/13052185311"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-lg hover:opacity-90 transition-opacity"
+            >
+              <MessageCircle size={32} />
+              <span className="font-bold text-lg">Chat on WhatsApp</span>
+            </a>
+            <a
+              href="https://www.tiktok.com/@jmgcustom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-8 py-4 bg-black text-white rounded-lg hover:opacity-90 transition-opacity"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+              <span className="font-bold text-lg">Follow on TikTok</span>
             </a>
           </div>
         </div>
@@ -113,8 +133,31 @@ const Social = () => {
         </div>
       </section>
 
+      {/* TikTok Section */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8 uppercase text-center">LATEST FROM TIKTOK</h2>
+          <div className="max-w-xl mx-auto bg-muted rounded-lg p-8 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor" className="mx-auto mb-4 text-accent">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+            </svg>
+            <p className="text-muted-foreground mb-6">
+              Follow us on TikTok @jmgcustom for short videos of our metalworking projects, shop tours, and fabrication tips.
+            </p>
+            <a
+              href="https://www.tiktok.com/@jmgcustom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-3 bg-black text-white rounded-md hover:opacity-90 transition-opacity font-bold"
+            >
+              View on TikTok
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-16 bg-background">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4 uppercase">
             CONNECT WITH US TODAY

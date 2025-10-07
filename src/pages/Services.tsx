@@ -6,7 +6,7 @@ const Services = () => {
     {
       icon: Building2,
       title: "Structural Steel Fabrication",
-      description: "Certified non-load-bearing steel fabrication for commercial and industrial applications. From CAD detailing to on-site installation — precision, compliance, and durability guaranteed.",
+      description: "Non-load-bearing steel fabrication for commercial and industrial applications. From CAD detailing to on-site installation — precision, compliance, and durability guaranteed.",
       keywords: "structural steel South Florida, steel fabricators South Florida, steel fabrication company",
     },
     {
@@ -24,7 +24,7 @@ const Services = () => {
     {
       icon: Shield,
       title: "Custom Railings & Handrails",
-      description: "ADA-compliant, code-certified architectural railings and handrails that merge safety and style. Expertly welded and finished for long-term durability.",
+      description: "ADA-compliant, code-approved architectural railings and handrails that merge safety and style. Expertly welded and finished for long-term durability.",
       keywords: "custom railings South Florida, metal handrails, ADA compliant railings",
     },
     {
@@ -42,7 +42,7 @@ const Services = () => {
     {
       icon: Flame,
       title: "General Welding",
-      description: "Certified MIG and TIG welding for carbon steel, stainless steel, and aluminum. Services include fabrication, repair, and on-site welding.",
+      description: "Professional MIG and TIG welding for carbon steel, stainless steel, and aluminum. Services include fabrication, repair, and on-site welding.",
       keywords: "welding services South Florida, MIG TIG welding, structural welding",
     },
     {
@@ -93,11 +93,11 @@ const Services = () => {
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               Our state-of-the-art facility features advanced CNC machinery, precision cutting equipment, 
-              and modern welding technology. This combination of cutting-edge tools and certified expertise 
+              and modern welding technology. This combination of cutting-edge tools and expert craftsmanship 
               enables us to deliver complex projects with exceptional accuracy and efficiency.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              From CAD-based design and plasma cutting to certified welding and quality control inspection, 
+              From CAD-based design and plasma cutting to professional welding and quality control inspection, 
               every step of our process is optimized for precision, safety, and lasting quality.
             </p>
           </div>
