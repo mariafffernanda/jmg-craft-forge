@@ -13,7 +13,8 @@ const Navigation = () => {
     { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
     { name: "Projects", path: "/projects" },
-    { name: "Safety", path: "/safety" },
+    { name: "FAQ", path: "/faq" },
+    { name: "Social", path: "/social" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -24,7 +25,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="JMG Custom Metal Shop logo" className="h-16 w-auto" />
+            <img src={logo} alt="JMG Custom Metal Shop logo" className="h-20 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

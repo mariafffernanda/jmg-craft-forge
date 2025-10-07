@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, Phone, Mail, MapPin } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -39,6 +40,8 @@ const Footer = () => {
               <Link to="/about" className="block hover:text-accent transition-colors">About</Link>
               <Link to="/services" className="block hover:text-accent transition-colors">Services</Link>
               <Link to="/projects" className="block hover:text-accent transition-colors">Projects</Link>
+              <Link to="/faq" className="block hover:text-accent transition-colors">FAQ</Link>
+              <Link to="/social" className="block hover:text-accent transition-colors">Social</Link>
               <Link to="/contact" className="block hover:text-accent transition-colors">Contact</Link>
             </div>
           </div>
@@ -73,6 +76,15 @@ const Footer = () => {
                 aria-label="LinkedIn"
               >
                 <Linkedin size={24} />
+              </a>
+              <a
+                href="https://wa.me/13052185311"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 hover:text-accent transition-colors"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={24} />
               </a>
             </div>
             <p className="mt-6 text-sm italic">

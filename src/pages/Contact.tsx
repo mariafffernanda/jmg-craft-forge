@@ -5,6 +5,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +19,7 @@ const Contact = () => {
     company: "",
     email: "",
     phone: "",
+    service: "",
     message: "",
   });
 
@@ -33,6 +41,7 @@ const Contact = () => {
       company: "",
       email: "",
       phone: "",
+      service: "",
       message: "",
     });
   };
@@ -179,6 +188,26 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="(305) 123-4567"
                   />
+                </div>
+
+                <div>
+                  <Label htmlFor="service">Service Needed</Label>
+                  <Select value={formData.service} onValueChange={(value) => setFormData({...formData, service: value})}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="structural-steel">Structural Steel Fabrication</SelectItem>
+                      <SelectItem value="misc-steel">Miscellaneous Steel Fabrication</SelectItem>
+                      <SelectItem value="staircases">Custom Staircases & Walkways</SelectItem>
+                      <SelectItem value="railings">Custom Railings & Handrails</SelectItem>
+                      <SelectItem value="metalwork">Metalwork & Architectural Detailing</SelectItem>
+                      <SelectItem value="cnc">CNC Forming & Cutting</SelectItem>
+                      <SelectItem value="welding">General Welding</SelectItem>
+                      <SelectItem value="installation">Field Installation</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
