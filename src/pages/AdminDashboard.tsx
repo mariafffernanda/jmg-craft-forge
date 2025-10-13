@@ -1,20 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { User, Session } from "@supabase/supabase-js";
-import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { LogOut, Mail, Phone, Building, Calendar } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
+import { LogOut, Mail, Phone, User, Calendar, Package } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 interface Lead {
   id: string;
@@ -29,42 +22,41 @@ interface Lead {
 }
 
 const AdminDashboard = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
   const [leads, setLeads] = useState<Lead[]>([]);
-  const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (!session?.user) {
-          navigate("/auth");
-        }
-      }
-    );
+    checkAuth();
+  }, []);
 
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (!session?.user) {
-        navigate("/auth");
-      } else {
-        fetchLeads();
-      }
-    });
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      navigate("/auth");
+      return;
+    }
 
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    const { data: roleData } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", session.user.id)
+      .eq("role", "admin")
+      .maybeSingle();
 
-  const fetchLeads = async () => {
+    if (!roleData) {
+      toast.error("You don't have admin privileges");
+      navigate("/");
+      return;
+    }
+
+    setIsAdmin(true);
+    loadLeads();
+  };
+
+  const loadLeads = async () => {
     try {
       const { data, error } = await supabase
         .from("leads")
@@ -73,18 +65,14 @@ const AdminDashboard = () => {
 
       if (error) throw error;
       setLeads(data || []);
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to fetch leads",
-        variant: "destructive",
-      });
+    } catch (error) {
+      toast.error("Failed to load leads");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  const handleSignOut = async () => {
+  const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/");
   };
@@ -98,129 +86,122 @@ const AdminDashboard = () => {
 
       if (error) throw error;
 
-      toast({
-        title: "Status updated",
-        description: "Lead status has been updated successfully.",
-      });
-
-      fetchLeads();
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to update status",
-        variant: "destructive",
-      });
+      toast.success("Lead status updated");
+      loadLeads();
+    } catch (error) {
+      toast.error("Failed to update lead status");
     }
   };
 
-  if (loading) {
+  if (!isAdmin || isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container mx-auto py-8 px-4">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-heading font-bold mb-2">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Manage your leads and website content</p>
+    <>
+      <Navigation />
+      <main className="min-h-screen bg-background py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="font-heading text-4xl font-bold">Admin Dashboard</h1>
+            <Button onClick={handleLogout} variant="outline">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
           </div>
-          <Button onClick={handleSignOut} variant="outline">
-            <LogOut className="mr-2 h-4 w-4" />
-            Sign Out
-          </Button>
-        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Quote Requests</CardTitle>
-            <CardDescription>
-              View and manage all quote requests from your website
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {leads.length === 0 ? (
-              <p className="text-center text-muted-foreground py-8">
-                No leads yet. When someone requests a quote, it will appear here.
-              </p>
-            ) : (
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Contact</TableHead>
-                      <TableHead>Service</TableHead>
-                      <TableHead>Details</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {leads.map((lead) => (
-                      <TableRow key={lead.id}>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-muted-foreground" />
-                            {new Date(lead.created_at).toLocaleDateString()}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div>
-                            <p className="font-medium">{lead.name}</p>
-                            {lead.company && (
-                              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                                <Building className="h-3 w-3" />
-                                {lead.company}
-                              </p>
-                            )}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="space-y-1">
-                            <p className="text-sm flex items-center gap-1">
-                              <Mail className="h-3 w-3" />
-                              {lead.email}
-                            </p>
-                            <p className="text-sm flex items-center gap-1">
-                              <Phone className="h-3 w-3" />
-                              {lead.phone}
-                            </p>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">{lead.service}</Badge>
-                        </TableCell>
-                        <TableCell className="max-w-xs">
-                          <p className="text-sm truncate">{lead.project_details}</p>
-                        </TableCell>
-                        <TableCell>
-                          <select
-                            value={lead.status}
-                            onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
-                            className="text-sm border rounded px-2 py-1"
-                          >
-                            <option value="new">New</option>
-                            <option value="contacted">Contacted</option>
-                            <option value="quoted">Quoted</option>
-                            <option value="won">Won</option>
-                            <option value="lost">Lost</option>
-                          </select>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-    </main>
+          <Tabs defaultValue="leads" className="space-y-6">
+            <TabsList>
+              <TabsTrigger value="leads">Leads ({leads.length})</TabsTrigger>
+              <TabsTrigger value="content">Content Editor</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="leads" className="space-y-4">
+              {leads.length === 0 ? (
+                <Card>
+                  <CardContent className="pt-6">
+                    <p className="text-center text-muted-foreground">No leads yet</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                leads.map((lead) => (
+                  <Card key={lead.id}>
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <CardTitle className="text-xl">{lead.name}</CardTitle>
+                        <select
+                          value={lead.status}
+                          onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
+                          className="px-3 py-1 rounded-md border bg-background"
+                        >
+                          <option value="new">New</option>
+                          <option value="contacted">Contacted</option>
+                          <option value="qualified">Qualified</option>
+                          <option value="closed">Closed</option>
+                        </select>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      {lead.company && (
+                        <div className="flex items-center gap-2 text-sm">
+                          <Package className="h-4 w-4 text-muted-foreground" />
+                          <span>{lead.company}</span>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-2 text-sm">
+                        <Mail className="h-4 w-4 text-muted-foreground" />
+                        <a href={`mailto:${lead.email}`} className="text-primary hover:underline">
+                          {lead.email}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Phone className="h-4 w-4 text-muted-foreground" />
+                        <a href={`tel:${lead.phone}`} className="text-primary hover:underline">
+                          {lead.phone}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <User className="h-4 w-4 text-muted-foreground" />
+                        <span className="font-medium">{lead.service}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <span>{new Date(lead.created_at).toLocaleDateString()}</span>
+                      </div>
+                      <div className="mt-4 p-4 bg-muted rounded-md">
+                        <p className="text-sm font-medium mb-2">Project Details:</p>
+                        <p className="text-sm text-muted-foreground">{lead.project_details}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              )}
+            </TabsContent>
+
+            <TabsContent value="content">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Content Management</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    You can manage your website content through the backend database.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    To add or edit projects, images, and other content, access your backend by clicking the button below.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 

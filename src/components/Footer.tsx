@@ -105,6 +105,11 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 pt-6 text-center text-sm">
           <p>© 2025 JMG Custom Metal Shop. All rights reserved.</p>
           <p className="mt-2">Serving South Florida | Miami-Dade, Broward & Palm Beach Counties</p>
+          <div className="mt-3">
+            <Link to="/auth" className="text-xs opacity-30 hover:opacity-100 transition-opacity">
+              admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
