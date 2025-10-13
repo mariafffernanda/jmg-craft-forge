@@ -1,73 +1,224 @@
-# Welcome to your Lovable project
+# JMG Custom Metal Shop Website
 
-## Project info
+A modern, professional website for JMG Custom Metal Shop - South Florida's premier metal fabrication company.
 
-**URL**: https://lovable.dev/projects/929ce4ef-2b3e-4b57-ba22-f23bd3eb6f92
+## Features
 
-## How can I edit this code?
+- **Multi-page Website**: Home, About, Services, Projects, FAQ, Contact, and Social pages
+- **Admin Dashboard**: Secure admin panel for managing leads and content
+- **Lead Management**: Contact form submissions tracked in Supabase
+- **Responsive Design**: Mobile-first design using Tailwind CSS
+- **Modern UI**: Built with shadcn/ui components
+- **Authentication**: Secure admin authentication with Supabase Auth
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend Framework**: React 18.3+ with TypeScript
+- **Build Tool**: Vite 7.1+
+- **Styling**: Tailwind CSS 3.4+
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Backend**: Supabase (Database + Authentication)
+- **Routing**: React Router v6
+- **Form Validation**: Zod schema validation
+- **Icons**: Lucide React
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/929ce4ef-2b3e-4b57-ba22-f23bd3eb6f92) and start prompting.
+## Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js 18+ or 20+ (LTS version recommended)
+- npm 9+ or pnpm 8+ or yarn 1.22+
+- A Supabase account and project
 
-**Use your preferred IDE**
+## Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 1. Clone the repository
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+```bash
 git clone <YOUR_GIT_URL>
+cd jmg-craft-forge-main
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 2. Install dependencies
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+npm install
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 3. Environment Setup
+
+Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and add your Supabase credentials:
+
+```env
+VITE_SUPABASE_PROJECT_ID=your_project_id_here
+VITE_SUPABASE_PUBLISHABLE_KEY=your_anon_public_key_here
+VITE_SUPABASE_URL=https://your_project_id.supabase.co
+```
+
+**IMPORTANT**: Never commit your `.env` file to version control. It's already in `.gitignore`.
+
+### 4. Database Setup
+
+Run the migrations in your Supabase project:
+
+1. Go to your Supabase project dashboard
+2. Navigate to SQL Editor
+3. Run the migration files from `supabase/migrations/` in order
+
+### 5. Start Development Server
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build in development mode
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Security Features
 
-## What technologies are used for this project?
+### Implemented Security Measures
 
-This project is built with:
+1. **Environment Variables**: All sensitive data stored in `.env` (not committed)
+2. **Input Validation**: Zod schemas validate all form inputs
+3. **SQL Injection Protection**: Supabase client uses parameterized queries
+4. **XSS Protection**: React escapes output by default
+5. **Authentication**: Supabase Auth with PKCE flow
+6. **Authorization**: Role-based access control (RBAC) for admin dashboard
+7. **HTTPS Only**: All API calls use HTTPS
+8. **Strict TypeScript**: Full type safety enabled
+9. **Dependency Security**: Regular updates and vulnerability scanning
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Security Best Practices
 
-## How can I deploy this project?
+- All dependencies are up-to-date (as of January 2025)
+- TypeScript strict mode enabled
+- No hardcoded secrets or credentials
+- CSRF protection through Supabase
+- Session management with auto-refresh tokens
 
-Simply open [Lovable](https://lovable.dev/projects/929ce4ef-2b3e-4b57-ba22-f23bd3eb6f92) and click on Share -> Publish.
+## Cross-Platform Compatibility
 
-## Can I connect a custom domain to my Lovable project?
+This application works on:
 
-Yes, you can!
+- **Operating Systems**: Windows, macOS, Linux
+- **Browsers**: Chrome, Firefox, Safari, Edge (latest 2 versions)
+- **Mobile**: iOS Safari, Android Chrome
+- **Node.js**: v18.x, v20.x, v22.x
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Path Compatibility
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Uses `path.resolve()` for cross-platform path handling
+- No hardcoded path separators
+- Vite handles file paths automatically
+
+## Deployment
+
+### Option 1: Lovable
+
+1. Open [Lovable](https://lovable.dev/projects/929ce4ef-2b3e-4b57-ba22-f23bd3eb6f92)
+2. Click on Share → Publish
+
+### Option 2: Manual Deployment (Vercel, Netlify, etc.)
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+
+2. Deploy the `dist` folder to your hosting provider
+
+3. Set environment variables in your hosting provider's dashboard
+
+### Option 3: Docker
+
+```dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+EXPOSE 8080
+CMD ["npm", "run", "preview"]
+```
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_SUPABASE_URL` | Your Supabase project URL | Yes |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Your Supabase anon/public key | Yes |
+| `VITE_SUPABASE_PROJECT_ID` | Your Supabase project ID | Yes |
+
+## Project Structure
+
+```
+jmg-craft-forge-main/
+├── src/
+│   ├── components/        # Reusable components
+│   │   ├── ui/           # shadcn/ui components
+│   │   ├── Footer.tsx
+│   │   ├── Navigation.tsx
+│   │   └── ...
+│   ├── pages/            # Page components
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   ├── Services.tsx
+│   │   ├── Contact.tsx
+│   │   ├── AdminDashboard.tsx
+│   │   └── ...
+│   ├── integrations/     # Third-party integrations
+│   │   └── supabase/
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Utility functions
+│   └── main.tsx          # Application entry point
+├── supabase/
+│   └── migrations/       # Database migrations
+├── public/               # Static assets
+├── .env.example          # Example environment variables
+└── package.json
+```
+
+## Browser Support
+
+- Chrome/Edge: Last 2 versions
+- Firefox: Last 2 versions
+- Safari: Last 2 versions
+- iOS Safari: iOS 13+
+- Android Chrome: Android 8+
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Ensure all tests pass
+4. Submit a pull request
+
+## Contact
+
+- **Phone**: (305) 218-5311
+- **Email**: jsuarezlig@gmail.com
+- **Address**: 7318 N.W. 79th Ter., Miami, FL 33166
+
+## License
+
+Copyright © 2025 JMG Custom Metal Shop. All rights reserved.
+
+## Support
+
+For issues or questions, please contact the development team or open an issue in the repository.
+
+---
+
+**Building the Future | Serving Today.**
