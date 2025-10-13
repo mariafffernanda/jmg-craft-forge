@@ -7,6 +7,7 @@ A modern, professional website for JMG Custom Metal Shop - South Florida's premi
 - **Multi-page Website**: Home, About, Services, Projects, FAQ, Contact, and Social pages
 - **Admin Dashboard**: Secure admin panel for managing leads and content
 - **Lead Management**: Contact form submissions tracked in Supabase
+- **Email Notifications**: Automatic email alerts for new contact form submissions (optional)
 - **Responsive Design**: Mobile-first design using Tailwind CSS
 - **Modern UI**: Built with shadcn/ui components
 - **Authentication**: Secure admin authentication with Supabase Auth
@@ -84,6 +85,33 @@ The site will be available at `http://localhost:8080`
 - `npm run build:dev` - Build in development mode
 - `npm run preview` - Preview production build locally
 - `npm run lint` - Run ESLint
+
+## Email Notifications
+
+The contact form can send automatic email notifications when someone submits a lead. This is **optional** but highly recommended.
+
+### Quick Setup (5 minutes)
+
+1. **Choose an email service** (Resend recommended)
+2. **Get API key** from the service
+3. **Deploy Edge Function** to Supabase
+4. **Run database migration**
+
+**Full instructions**: See [EMAIL-NOTIFICATIONS-SETUP.md](EMAIL-NOTIFICATIONS-SETUP.md)
+
+### What Gets Sent
+
+When a customer submits the contact form:
+- ✅ Email sent to **jsuarezlig@gmail.com** with all submission details
+- ✅ Lead saved to admin dashboard automatically
+- ✅ Customer sees success message
+
+### Recommended Services
+
+- **Resend** (Easiest) - 3,000 free emails/month
+- **SendGrid** - 100 free emails/day
+- **Zapier** - No code solution
+- See full comparison in setup guide
 
 ## Security Features
 
