@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Select,
   SelectContent,
@@ -23,7 +24,7 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -32,18 +33,34 @@ const Contact = () => {
       return;
     }
 
-    // In a real application, this would submit to a backend
-    toast.success("Thank you! We'll contact you soon.");
-    
-    // Reset form
-    setFormData({
-      name: "",
-      company: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
+    try {
+      const { error } = await supabase.from("leads").insert([
+        {
+          name: formData.name,
+          company: formData.company || null,
+          email: formData.email,
+          phone: formData.phone || "",
+          service: formData.service || "General Inquiry",
+          project_details: formData.message,
+        },
+      ]);
+
+      if (error) throw error;
+
+      toast.success("Thank you! We'll contact you soon.");
+      
+      // Reset form
+      setFormData({
+        name: "",
+        company: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit request. Please try again.");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
