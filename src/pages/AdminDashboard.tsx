@@ -4,8 +4,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { LogOut, Mail, Phone, User, Calendar, Package } from "lucide-react";
+import { LogOut, Mail, Phone, User, Calendar, Package, Save } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -21,8 +24,18 @@ interface Lead {
   created_at: string | null;
 }
 
+interface ContentItem {
+  id: string;
+  page: string;
+  section: string;
+  content_key: string;
+  content_value: string;
+}
+
 const AdminDashboard = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [content, setContent] = useState<ContentItem[]>([]);
+  const [editingContent, setEditingContent] = useState<{ [key: string]: string }>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
@@ -54,6 +67,7 @@ const AdminDashboard = () => {
 
     setIsAdmin(true);
     loadLeads();
+    loadContent();
   };
 
   const loadLeads = async () => {
@@ -69,6 +83,45 @@ const AdminDashboard = () => {
       toast.error("Failed to load leads");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const loadContent = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("site_content")
+        .select("*")
+        .order("page", { ascending: true });
+
+      if (error) throw error;
+      
+      const contentData = data || [];
+      setContent(contentData);
+      
+      // Initialize editing state
+      const initialEditing: { [key: string]: string } = {};
+      contentData.forEach(item => {
+        initialEditing[item.id] = item.content_value;
+      });
+      setEditingContent(initialEditing);
+    } catch (error) {
+      toast.error("Failed to load content");
+    }
+  };
+
+  const updateContent = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("site_content")
+        .update({ content_value: editingContent[id] })
+        .eq("id", id);
+
+      if (error) throw error;
+
+      toast.success("Content updated successfully");
+      loadContent();
+    } catch (error) {
+      toast.error("Failed to update content");
     }
   };
 
@@ -182,18 +235,193 @@ const AdminDashboard = () => {
               )}
             </TabsContent>
 
-            <TabsContent value="content">
+            <TabsContent value="content" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Content Management</CardTitle>
+                  <CardTitle>Website Content Editor</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    You can manage your website content through the backend database.
+                  <p className="text-muted-foreground mb-6">
+                    Edit your website content directly from this dashboard. Changes will appear on the live site immediately.
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    To add or edit projects, images, and other content, access your backend by clicking the button below.
-                  </p>
+
+                  <Tabs defaultValue="home" className="space-y-4">
+                    <TabsList className="grid w-full grid-cols-4">
+                      <TabsTrigger value="home">Home</TabsTrigger>
+                      <TabsTrigger value="services">Services</TabsTrigger>
+                      <TabsTrigger value="about">About</TabsTrigger>
+                      <TabsTrigger value="contact">Contact</TabsTrigger>
+                    </TabsList>
+
+                    {/* Home Content */}
+                    <TabsContent value="home" className="space-y-4">
+                      {content
+                        .filter(item => item.page === "home")
+                        .map(item => (
+                          <Card key={item.id}>
+                            <CardHeader>
+                              <CardTitle className="text-lg capitalize">{item.section} - {item.content_key}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              <div>
+                                <Label>Content</Label>
+                                {item.content_value.length > 100 ? (
+                                  <Textarea
+                                    value={editingContent[item.id] || ""}
+                                    onChange={(e) => setEditingContent({
+                                      ...editingContent,
+                                      [item.id]: e.target.value
+                                    })}
+                                    rows={4}
+                                  />
+                                ) : (
+                                  <Input
+                                    value={editingContent[item.id] || ""}
+                                    onChange={(e) => setEditingContent({
+                                      ...editingContent,
+                                      [item.id]: e.target.value
+                                    })}
+                                  />
+                                )}
+                              </div>
+                              <Button onClick={() => updateContent(item.id)}>
+                                <Save className="mr-2 h-4 w-4" />
+                                Save Changes
+                              </Button>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      {content.filter(item => item.page === "home").length === 0 && (
+                        <p className="text-muted-foreground text-center py-8">
+                          No content found for Home page. Content will be created automatically when pages are loaded.
+                        </p>
+                      )}
+                    </TabsContent>
+
+                    {/* Services Content */}
+                    <TabsContent value="services" className="space-y-4">
+                      {content
+                        .filter(item => item.page === "services")
+                        .map(item => (
+                          <Card key={item.id}>
+                            <CardHeader>
+                              <CardTitle className="text-lg capitalize">{item.section} - {item.content_key}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              <div>
+                                <Label>Content</Label>
+                                {item.content_value.length > 100 ? (
+                                  <Textarea
+                                    value={editingContent[item.id] || ""}
+                                    onChange={(e) => setEditingContent({
+                                      ...editingContent,
+                                      [item.id]: e.target.value
+                                    })}
+                                    rows={4}
+                                  />
+                                ) : (
+                                  <Input
+                                    value={editingContent[item.id] || ""}
+                                    onChange={(e) => setEditingContent({
+                                      ...editingContent,
+                                      [item.id]: e.target.value
+                                    })}
+                                  />
+                                )}
+                              </div>
+                              <Button onClick={() => updateContent(item.id)}>
+                                <Save className="mr-2 h-4 w-4" />
+                                Save Changes
+                              </Button>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      {content.filter(item => item.page === "services").length === 0 && (
+                        <p className="text-muted-foreground text-center py-8">
+                          No content found for Services page. Content will be created automatically when pages are loaded.
+                        </p>
+                      )}
+                    </TabsContent>
+
+                    {/* About Content */}
+                    <TabsContent value="about" className="space-y-4">
+                      {content
+                        .filter(item => item.page === "about")
+                        .map(item => (
+                          <Card key={item.id}>
+                            <CardHeader>
+                              <CardTitle className="text-lg capitalize">{item.section} - {item.content_key}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              <div>
+                                <Label>Content</Label>
+                                {item.content_value.length > 100 ? (
+                                  <Textarea
+                                    value={editingContent[item.id] || ""}
+                                    onChange={(e) => setEditingContent({
+                                      ...editingContent,
+                                      [item.id]: e.target.value
+                                    })}
+                                    rows={4}
+                                  />
+                                ) : (
+                                  <Input
+                                    value={editingContent[item.id] || ""}
+                                    onChange={(e) => setEditingContent({
+                                      ...editingContent,
+                                      [item.id]: e.target.value
+                                    })}
+                                  />
+                                )}
+                              </div>
+                              <Button onClick={() => updateContent(item.id)}>
+                                <Save className="mr-2 h-4 w-4" />
+                                Save Changes
+                              </Button>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      {content.filter(item => item.page === "about").length === 0 && (
+                        <p className="text-muted-foreground text-center py-8">
+                          No content found for About page. Content will be created automatically when pages are loaded.
+                        </p>
+                      )}
+                    </TabsContent>
+
+                    {/* Contact Content */}
+                    <TabsContent value="contact" className="space-y-4">
+                      {content
+                        .filter(item => item.page === "contact")
+                        .map(item => (
+                          <Card key={item.id}>
+                            <CardHeader>
+                              <CardTitle className="text-lg capitalize">{item.section} - {item.content_key}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              <div>
+                                <Label>Content</Label>
+                                <Input
+                                  value={editingContent[item.id] || ""}
+                                  onChange={(e) => setEditingContent({
+                                    ...editingContent,
+                                    [item.id]: e.target.value
+                                  })}
+                                />
+                              </div>
+                              <Button onClick={() => updateContent(item.id)}>
+                                <Save className="mr-2 h-4 w-4" />
+                                Save Changes
+                              </Button>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      {content.filter(item => item.page === "contact").length === 0 && (
+                        <p className="text-muted-foreground text-center py-8">
+                          No content found for Contact page. Content will be created automatically when pages are loaded.
+                        </p>
+                      )}
+                    </TabsContent>
+                  </Tabs>
                 </CardContent>
               </Card>
             </TabsContent>
