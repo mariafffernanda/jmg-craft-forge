@@ -17,8 +17,8 @@ interface Lead {
   phone: string;
   service: string;
   project_details: string;
-  status: string;
-  created_at: string;
+  status: string | null;
+  created_at: string | null;
 }
 
 const AdminDashboard = () => {
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
                       <div className="flex justify-between items-start">
                         <CardTitle className="text-xl">{lead.name}</CardTitle>
                         <select
-                          value={lead.status}
+                          value={lead.status || "new"}
                           onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
                           className="px-3 py-1 rounded-md border bg-background"
                         >
@@ -170,7 +170,7 @@ const AdminDashboard = () => {
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <span>{new Date(lead.created_at).toLocaleDateString()}</span>
+                        <span>{lead.created_at ? new Date(lead.created_at).toLocaleDateString() : "N/A"}</span>
                       </div>
                       <div className="mt-4 p-4 bg-muted rounded-md">
                         <p className="text-sm font-medium mb-2">Project Details:</p>

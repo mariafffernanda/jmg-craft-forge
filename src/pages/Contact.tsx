@@ -13,6 +13,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { z } from "zod";
+
+// Validation schema for lead form
+const leadSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
+  company: z.string().trim().max(100, "Company name too long").optional(),
+  email: z.string().trim().email("Invalid email address").max(255, "Email too long"),
+  phone: z.string().trim().max(20, "Phone number too long").optional(),
+  service: z.string().max(100, "Service name too long"),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(5000, "Message too long"),
+});
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,25 +38,51 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Please fill in all required fields");
+    // Comprehensive validation with Zod
+    const validation = leadSchema.safeParse({
+      name: formData.name,
+      company: formData.company,
+      email: formData.email,
+      phone: formData.phone,
+      service: formData.service,
+      message: formData.message,
+    });
+
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
+      toast.error(firstError.message);
       return;
+    }
+
+    // Rate limiting check - prevent rapid submissions
+    const lastSubmission = localStorage.getItem('lastLeadSubmission');
+    if (lastSubmission) {
+      const timeSinceLastSubmission = Date.now() - parseInt(lastSubmission);
+      const minTimeBetweenSubmissions = 60000; // 1 minute
+      
+      if (timeSinceLastSubmission < minTimeBetweenSubmissions) {
+        const remainingTime = Math.ceil((minTimeBetweenSubmissions - timeSinceLastSubmission) / 1000);
+        toast.error(`Please wait ${remainingTime} seconds before submitting again`);
+        return;
+      }
     }
 
     try {
       const { error } = await supabase.from("leads").insert([
         {
-          name: formData.name,
-          company: formData.company || null,
-          email: formData.email,
-          phone: formData.phone || "",
-          service: formData.service || "General Inquiry",
-          project_details: formData.message,
+          name: validation.data.name,
+          company: validation.data.company || null,
+          email: validation.data.email,
+          phone: validation.data.phone || "",
+          service: validation.data.service || "General Inquiry",
+          project_details: validation.data.message,
         },
       ]);
 
       if (error) throw error;
+
+      // Set timestamp for rate limiting
+      localStorage.setItem('lastLeadSubmission', Date.now().toString());
 
       toast.success("Thank you! We'll contact you soon.");
       
