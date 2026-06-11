@@ -1,17 +1,27 @@
 // Supabase Edge Function to send email notifications for new leads
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const NOTIFICATION_EMAIL = "jsuarezlig@gmail.com";
 
-interface LeadData {
-  name: string;
-  company?: string;
-  email: string;
-  phone: string;
-  service: string;
-  project_details: string;
-  created_at: string;
+const LeadSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  company: z.string().trim().max(100).optional().nullable(),
+  email: z.string().trim().email().max(255),
+  phone: z.string().trim().max(20),
+  service: z.string().trim().max(100),
+  project_details: z.string().trim().min(1).max(5000),
+  created_at: z.string().max(64),
+});
+
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 const corsHeaders = {
@@ -27,7 +37,27 @@ serve(async (req) => {
   }
 
   try {
-    const lead: LeadData = await req.json();
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const parsed = LeadSchema.safeParse(await req.json());
+    if (!parsed.success) {
+      return new Response(
+        JSON.stringify({ error: "Invalid input" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+    const lead = parsed.data;
+    const safeEmailHref = lead.email.replace(/[^a-zA-Z0-9@._+-]/g, "");
+    const safePhoneHref = lead.phone.replace(/[^0-9+]/g, "");
 
     // Format the email HTML
     const emailHtml = `
@@ -60,34 +90,34 @@ serve(async (req) => {
 
               <div class="field">
                 <span class="label">Name:</span><br>
-                <span class="value">${lead.name}</span>
+                <span class="value">${escapeHtml(lead.name)}</span>
               </div>
 
               ${lead.company ? `
               <div class="field">
                 <span class="label">Company:</span><br>
-                <span class="value">${lead.company}</span>
+                <span class="value">${escapeHtml(lead.company)}</span>
               </div>
               ` : ''}
 
               <div class="field">
                 <span class="label">Email:</span><br>
-                <span class="value"><a href="mailto:${lead.email}">${lead.email}</a></span>
+                <span class="value"><a href="mailto:${safeEmailHref}">${escapeHtml(lead.email)}</a></span>
               </div>
 
               <div class="field">
                 <span class="label">Phone:</span><br>
-                <span class="value"><a href="tel:${lead.phone}">${lead.phone}</a></span>
+                <span class="value"><a href="tel:${safePhoneHref}">${escapeHtml(lead.phone)}</a></span>
               </div>
 
               <div class="field">
                 <span class="label">Service Requested:</span><br>
-                <span class="value">${lead.service}</span>
+                <span class="value">${escapeHtml(lead.service)}</span>
               </div>
 
               <div class="field">
                 <span class="label">Project Details:</span><br>
-                <span class="value">${lead.project_details.replace(/\n/g, '<br>')}</span>
+                <span class="value">${escapeHtml(lead.project_details).replace(/\n/g, '<br>')}</span>
               </div>
 
               <div class="field">
