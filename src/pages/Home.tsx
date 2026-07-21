@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Award, Shield, Clock } from "lucide-react";
+import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper } from "lucide-react";
 import heroImage from "@/assets/hero-metalwork.jpg";
-import projectStairs from "@/assets/project-stairs.jpg";
-import projectStructural from "@/assets/project-structural.jpg";
-import projectRailing from "@/assets/project-railing.jpg";
-import ProjectCard from "@/components/ProjectCard";
+import { portfolio } from "@/data/portfolio";
 
 const Home = () => {
   const features = [
@@ -90,29 +87,88 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard
-              image={projectStairs}
-              title="Commercial Staircase"
-              description="Custom metal staircase with architectural railings"
-              location="Fort Lauderdale, FL"
-            />
-            <ProjectCard
-              image={projectStructural}
-              title="Structural Steel Framework"
-              description="Non-load-bearing steel fabrication for industrial facility"
-              location="Miami, FL"
-            />
-            <ProjectCard
-              image={projectRailing}
-              title="Decorative Metal Railings"
-              description="ADA-compliant custom railings with modern design"
-              location="Hollywood, FL"
-            />
+            {portfolio.slice(0, 3).map((c) => (
+              <Link
+                key={c.slug}
+                to={`/projects/${c.slug}`}
+                className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow"
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={c.cover}
+                    alt={c.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/95 to-transparent p-5 text-primary-foreground">
+                  <h3 className="text-xl font-bold uppercase mb-1">{c.title}</h3>
+                  <p className="text-sm text-primary-foreground/90">{c.tagline}</p>
+                  <span className="mt-2 inline-flex items-center gap-1 text-xs text-accent font-semibold">
+                    View gallery <ArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
           <div className="text-center mt-12">
             <Button asChild size="lg" variant="outline">
               <Link to="/projects">VIEW ALL PROJECTS <ArrowRight className="ml-2" /></Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Press */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 text-accent uppercase text-sm font-bold tracking-wide mb-3">
+              <Newspaper className="h-4 w-4" /> Featured by the Sun Sentinel — May 2024
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold uppercase mb-4">
+              Sunset Point Park — Signature Red Installation
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              JMG completed the custom metal fabrication for the park's signature
+              red installation in Tamarac, FL — a large-scale outdoor project
+              showcasing complex steel structures with precision, durability, and
+              strong visual impact.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By / Past Project Partners */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold uppercase mb-3">
+              Trusted by Teams Across South Florida
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              JMG has supported contractors, developers, manufacturers, property
+              managers, and municipalities on projects of every scale.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {[
+              "General Contractors",
+              "Architects & Designers",
+              "Municipalities",
+              "Cruise Line Projects",
+              "Commercial Developers",
+              "Aerospace & Industrial",
+              "Property Managers",
+              "Construction Managers",
+            ].map((label) => (
+              <div
+                key={label}
+                className="border border-border rounded-lg p-4 text-center bg-card text-sm font-semibold uppercase tracking-wide"
+              >
+                {label}
+              </div>
+            ))}
           </div>
         </div>
       </section>
