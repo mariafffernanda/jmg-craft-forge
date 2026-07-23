@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper } from "lucide-react";
+import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper, ExternalLink } from "lucide-react";
 import heroImage from "@/assets/hero-metalwork.jpg";
 import { portfolio } from "@/data/portfolio";
 
@@ -129,12 +129,29 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-bold uppercase mb-4">
               Sunset Point Park — Signature Red Installation
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               JMG completed the custom metal fabrication for the park's signature
               red installation in Tamarac, FL — a large-scale outdoor project
               showcasing complex steel structures with precision, durability, and
               strong visual impact.
             </p>
+            <blockquote className="border-l-4 border-accent bg-background/60 px-5 py-4 italic text-muted-foreground text-left mb-6">
+              "Explore what's new at 4 South Florida parks: there's a beachside
+              learning trail, observation pier and more" — featuring Tamarac's
+              newly opened Sunset Point Park.
+              <footer className="not-italic text-sm mt-2 text-foreground/70">
+                — Sun Sentinel, May 14, 2024
+              </footer>
+            </blockquote>
+            <a
+              href="https://www.sun-sentinel.com/2024/05/14/explore-whats-new-at-4-south-florida-parks-theres-a-beachside-learning-trail-observation-pier-and-more/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold uppercase tracking-wide px-5 py-3 rounded-md hover:bg-accent/90 transition-colors"
+            >
+              Read the full article
+              <ExternalLink className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </section>
