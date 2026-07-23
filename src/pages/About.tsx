@@ -15,7 +15,7 @@ const About = () => {
     {
       icon: Award,
       title: "Expert Craftsmanship",
-      description: "Our team brings decades of experience and commitment to excellence.",
+      description: "A seasoned team committed to precision and excellence on every project.",
     },
     {
       icon: Users,
@@ -44,9 +44,9 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold mb-8 uppercase">ABOUT US</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              JMG Custom Metal Shop is a full-service metal fabrication company located in Miami, Florida. 
-              With decades of combined experience, we've built our reputation on delivering high-quality 
-              metalwork for contractors, architects, developers, and property owners across South Florida.
+              JMG Custom Metal Shop is a full-service metal fabrication company located in Miami, Florida.
+              We've built our reputation on delivering high-quality metalwork for contractors, architects,
+              developers, and property owners across South Florida.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
               Our team specializes in structural steel fabrication, custom railings, metal staircases, 
@@ -144,10 +144,9 @@ const About = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6 uppercase">LEADERSHIP & EXPERTISE</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Led by Jackson Suarez and a team of experienced fabricators, JMG Custom Metal Shop brings 
-              decades of combined experience in precision metal fabrication. Our commitment to continuous 
-              training and investment in cutting-edge technology ensures we deliver industry-leading results 
-              on every project.
+              Led by Jackson Suarez and a seasoned team of fabricators, JMG Custom Metal Shop delivers
+              precision metal fabrication built on continuous training and investment in cutting-edge
+              technology — ensuring industry-leading results on every project.
             </p>
           </div>
         </div>
