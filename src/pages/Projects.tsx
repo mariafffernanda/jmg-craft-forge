@@ -66,32 +66,49 @@ const Projects = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolio.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/projects/${c.slug}`}
-                className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow"
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={c.cover}
-                    alt={c.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
+            {portfolio.map((c) => {
+              const hasGallery = c.images.length > 1;
+              const inner = (
+                <>
+                  <div className="aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden">
+                    <img
+                      src={c.cover}
+                      alt={c.title}
+                      loading="lazy"
+                      className={`max-w-full max-h-full object-contain ${hasGallery ? "group-hover:scale-105 transition-transform duration-300" : ""}`}
+                    />
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/95 via-primary/70 to-transparent p-5 text-primary-foreground">
+                    <h3 className="text-xl font-bold uppercase mb-1">{c.title}</h3>
+                    <p className="text-sm text-primary-foreground/90 mb-2">
+                      {c.tagline}
+                    </p>
+                    {hasGallery && (
+                      <span className="inline-flex items-center gap-1 text-xs text-accent font-semibold">
+                        View {c.images.length} projects
+                        <ArrowRight className="h-3 w-3" />
+                      </span>
+                    )}
+                  </div>
+                </>
+              );
+              return hasGallery ? (
+                <Link
+                  key={c.slug}
+                  to={`/projects/${c.slug}`}
+                  className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow"
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div
+                  key={c.slug}
+                  className="relative overflow-hidden rounded-lg shadow-md"
+                >
+                  {inner}
                 </div>
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/95 via-primary/70 to-transparent p-5 text-primary-foreground">
-                  <h3 className="text-xl font-bold uppercase mb-1">{c.title}</h3>
-                  <p className="text-sm text-primary-foreground/90 mb-2">
-                    {c.tagline}
-                  </p>
-                  <span className="inline-flex items-center gap-1 text-xs text-accent font-semibold">
-                    View {c.images.length} project{c.images.length > 1 ? "s" : ""}
-                    <ArrowRight className="h-3 w-3" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
