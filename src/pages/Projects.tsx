@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Newspaper } from "lucide-react";
+import { ArrowRight, ExternalLink, Newspaper } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 
 const Projects = () => {
@@ -21,20 +21,38 @@ const Projects = () => {
       {/* Featured Project */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto rounded-xl border-2 border-accent/40 bg-card p-8 md:p-12 shadow-lg">
+          <article className="max-w-5xl mx-auto rounded-xl border-2 border-accent/40 bg-card p-8 md:p-12 shadow-lg">
             <div className="flex items-center gap-2 text-accent uppercase text-sm font-bold tracking-wide mb-3">
               <Newspaper className="h-4 w-4" /> Featured by the Sun Sentinel — May 2024
             </div>
             <h2 className="text-3xl md:text-4xl font-bold uppercase mb-4">
               Sunset Point Park — Signature Red Installation
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               JMG completed the custom metal fabrication for the park's signature
               red installation in Tamarac, FL. This large-scale outdoor project
               highlights our ability to execute complex steel structures with
               precision, durability, and strong visual impact.
             </p>
-          </div>
+            <blockquote className="border-l-4 border-accent bg-muted/50 px-5 py-4 italic text-muted-foreground mb-6">
+              "Explore what's new at 4 South Florida parks: there's a beachside
+              learning trail, observation pier and more" — a look at the newly
+              opened Sunset Point Park in Tamarac and the fresh amenities drawing
+              families back outdoors.
+              <footer className="not-italic text-sm mt-2 text-foreground/70">
+                — Sun Sentinel, May 14, 2024
+              </footer>
+            </blockquote>
+            <a
+              href="https://www.sun-sentinel.com/2024/05/14/explore-whats-new-at-4-south-florida-parks-theres-a-beachside-learning-trail-observation-pier-and-more/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-bold uppercase tracking-wide px-5 py-3 rounded-md hover:bg-accent/90 transition-colors"
+            >
+              Read the full article
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </article>
         </div>
       </section>
 
