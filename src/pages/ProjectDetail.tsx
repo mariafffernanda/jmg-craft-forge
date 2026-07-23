@@ -38,14 +38,14 @@ const ProjectDetail = () => {
             {category.images.map((img, i) => (
               <figure
                 key={i}
-                className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-lg transition-shadow"
+                className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-muted">
+                <div className="aspect-[4/3] bg-muted flex items-center justify-center">
                   <img
                     src={img.url}
                     alt={`${category.title} — ${img.caption}`}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="max-w-full max-h-full object-contain"
                   />
                 </div>
                 <figcaption className="p-4 text-sm text-muted-foreground">
