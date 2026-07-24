@@ -1,16 +1,25 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ZoomIn, X } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { getCategory, portfolio } from "@/data/portfolio";
 import NotFound from "./NotFound";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const category = slug ? getCategory(slug) : undefined;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!category) return <NotFound />;
 
   const others = portfolio.filter((c) => c.slug !== category.slug).slice(0, 3);
+  const images = category.images;
+  const active = lightboxIndex !== null ? images[lightboxIndex] : null;
+  const showPrev = () =>
+    setLightboxIndex((i) => (i === null ? i : (i - 1 + images.length) % images.length));
+  const showNext = () =>
+    setLightboxIndex((i) => (i === null ? i : (i + 1) % images.length));
 
   return (
     <div className="min-h-screen">
@@ -38,16 +47,24 @@ const ProjectDetail = () => {
             {category.images.map((img, i) => (
               <figure
                 key={i}
-                className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+                className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm"
               >
-                <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => setLightboxIndex(i)}
+                  className="relative aspect-[4/3] w-full bg-muted flex items-center justify-center overflow-hidden cursor-zoom-in"
+                  aria-label={`View larger: ${img.caption}`}
+                >
                   <img
                     src={img.url}
                     alt={`${category.title} — ${img.caption}`}
                     loading="lazy"
-                    className="max-w-full max-h-full object-contain"
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
-                </div>
+                  <span className="absolute top-2 right-2 bg-primary/80 text-primary-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ZoomIn className="h-4 w-4" />
+                  </span>
+                </button>
                 <figcaption className="p-4 text-sm text-muted-foreground">
                   {img.caption}
                 </figcaption>
@@ -56,6 +73,54 @@ const ProjectDetail = () => {
           </div>
         </div>
       </section>
+
+      <Dialog open={lightboxIndex !== null} onOpenChange={(o) => !o && setLightboxIndex(null)}>
+        <DialogContent className="max-w-6xl w-[95vw] p-0 bg-background border-border">
+          {active && (
+            <div className="relative">
+              <div className="bg-muted flex items-center justify-center max-h-[80vh] overflow-hidden">
+                <img
+                  src={active.url}
+                  alt={`${category.title} — ${active.caption}`}
+                  className="max-w-full max-h-[80vh] object-contain"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-4 p-4 border-t border-border">
+                <p className="text-sm text-muted-foreground">{active.caption}</p>
+                <p className="text-xs text-muted-foreground whitespace-nowrap">
+                  {(lightboxIndex ?? 0) + 1} / {images.length}
+                </p>
+              </div>
+              {images.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={showPrev}
+                    aria-label="Previous image"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-full p-2"
+                  >
+                    <ArrowLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={showNext}
+                    aria-label="Next image"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-full p-2"
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+              <DialogClose
+                aria-label="Close"
+                className="absolute top-2 right-2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-full p-2"
+              >
+                <X className="h-4 w-4" />
+              </DialogClose>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
