@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper, ExternalLink } from "lucide-react";
-import heroImage from "@/assets/hero-metalwork.jpg";
+import heroImage from "@/assets/portfolio/struct-jmg-site.jpg.asset.json";
 import { portfolio } from "@/data/portfolio";
 
 const Home = () => {
@@ -18,19 +18,19 @@ const Home = () => {
       <section className="relative h-[600px] flex items-center justify-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
+          style={{ backgroundImage: `url(${heroImage.url})` }}
         >
           <div className="absolute inset-0 bg-primary/80"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-primary-foreground">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-tight">
-            PRECISION METAL FABRICATION
+            BUILT IN THE SHOP. INSTALLED ON SITE.
           </h1>
           <p className="text-xl md:text-2xl mb-4 max-w-3xl mx-auto">
-            Structural Steel | Custom Railings | Metal Staircases | CNC Cutting | Welding & Installation
+            Structural steel, custom staircases, architectural metalwork, and specialty fabrication — designed, welded, and installed by the JMG crew across South Florida.
           </p>
           <p className="text-lg mb-8 text-accent font-semibold">
-            Serving South Florida with Excellence
+            Family-run. Miami-based. Trusted by contractors and architects since day one.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="default" className="text-lg px-8">
@@ -50,13 +50,13 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6 uppercase">
-              South Florida's Trusted Metal Fabrication Partner
+              A South Florida Metal Shop That Actually Answers the Phone
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              JMG Custom Metal Shop delivers comprehensive metal fabrication solutions with precision, 
-              safety, and lasting quality. From CAD detailing to on-site installation, we combine advanced 
-              technology with expert craftsmanship to exceed expectations in structural steel, 
-              architectural metalwork, and custom fabrication.
+              JMG Custom Metal Shop is a hands-on fabrication team based in Miami. We read the drawings,
+              build in our own shop, and show up to install — from a single custom staircase to a full
+              structural steel package. No middlemen, no runaround: talk directly to the people cutting,
+              welding, and installing your project.
             </p>
           </div>
         </div>
