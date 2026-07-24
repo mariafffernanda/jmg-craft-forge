@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ZoomIn, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ZoomIn } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { getCategory, portfolio } from "@/data/portfolio";
 import NotFound from "./NotFound";
 
