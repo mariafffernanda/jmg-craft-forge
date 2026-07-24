@@ -74,6 +74,7 @@ export const portfolio: PortfolioCategory[] = [
       { url: stairGalv.url, caption: "Galvanized spiral stair, in-shop" },
       { url: stairShopBlack.url, caption: "Structural stair fabricated on-site" },
       { url: stairYellow.url, caption: "Safety-yellow access platform" },
+      { url: indLargeLadder.url, caption: "Large fabricated access ladder / stair frame" },
     ],
   },
   {
@@ -124,9 +125,8 @@ export const portfolio: PortfolioCategory[] = [
     tagline: "Racks, frames, carts, and specialty assemblies.",
     description:
       "Custom racks, support frames, carts, brackets, ladders, and specialty welded assemblies built around specific operational, storage, and material-handling requirements.",
-    cover: indLargeLadder.url,
+    cover: indTextileRack.url,
     images: [
-      { url: indLargeLadder.url, caption: "Large fabricated ladder / access frame" },
       { url: indTextileRack.url, caption: "Custom textile rack system" },
       { url: indPlateStacks.url, caption: "Precision-cut plate stock, ready for fabrication" },
       { url: indBlueCart.url, caption: "Custom rolling material cart" },
