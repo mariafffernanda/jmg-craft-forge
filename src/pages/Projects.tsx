@@ -23,10 +23,10 @@ const Projects = () => {
         <div className="container mx-auto px-4">
           <article className="max-w-5xl mx-auto rounded-xl border-2 border-accent/40 bg-card p-8 md:p-12 shadow-lg">
             <div className="flex items-center gap-2 text-accent uppercase text-sm font-bold tracking-wide mb-3">
-              <Newspaper className="h-4 w-4" /> Featured by the Sun Sentinel — May 2024
+              <Newspaper className="h-4 w-4" /> Featured by the Sun Sentinel, May 2024
             </div>
             <h2 className="text-3xl md:text-4xl font-bold uppercase mb-4">
-              Sunset Point Park — Signature Red Installation
+              Sunset Point Park: Signature Red Installation
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               JMG completed the custom metal fabrication for the park's signature
@@ -36,11 +36,11 @@ const Projects = () => {
             </p>
             <blockquote className="border-l-4 border-accent bg-muted/50 px-5 py-4 italic text-muted-foreground mb-6">
               "Explore what's new at 4 South Florida parks: there's a beachside
-              learning trail, observation pier and more" — a look at the newly
+              learning trail, observation pier and more." A look at the newly
               opened Sunset Point Park in Tamarac and the fresh amenities drawing
               families back outdoors.
               <footer className="not-italic text-sm mt-2 text-foreground/70">
-                — Sun Sentinel, May 14, 2024
+                Sun Sentinel, May 14, 2024
               </footer>
             </blockquote>
             <a

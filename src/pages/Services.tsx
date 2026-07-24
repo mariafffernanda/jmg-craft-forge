@@ -6,7 +6,7 @@ const Services = () => {
     {
       icon: Building2,
       title: "Structural Steel Fabrication",
-      description: "Non-load-bearing steel fabrication for commercial and industrial applications. From CAD detailing to on-site installation — precision, compliance, and durability guaranteed.",
+      description: "Non-load-bearing steel fabrication for commercial and industrial applications. From CAD detailing to on-site installation, delivering precision, compliance, and durability.",
       keywords: "structural steel South Florida, steel fabricators South Florida, steel fabrication company",
     },
     {
@@ -30,7 +30,7 @@ const Services = () => {
     {
       icon: Sparkles,
       title: "Metalwork & Architectural Detailing",
-      description: "Ornamental and architectural metal features — including gates, fencing, louver panels, vents, and decorative panels.",
+      description: "Ornamental and architectural metal features including gates, fencing, louver panels, vents, and decorative panels.",
       keywords: "decorative metalwork South Florida, architectural metal panels, custom gates and fences",
     },
     {

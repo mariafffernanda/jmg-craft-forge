@@ -57,7 +57,7 @@ const ProjectDetail = () => {
                 >
                   <img
                     src={img.url}
-                    alt={`${category.title} — ${img.caption}`}
+                    alt={`${category.title}: ${img.caption}`}
                     loading="lazy"
                     className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
@@ -78,7 +78,7 @@ const ProjectDetail = () => {
               <div className="bg-muted flex items-center justify-center max-h-[80vh] overflow-hidden">
                 <img
                   src={active.url}
-                  alt={`${category.title} — ${active.caption}`}
+                  alt={`${category.title}: ${active.caption}`}
                   className="max-w-full max-h-[80vh] object-contain"
                 />
               </div>
