@@ -65,9 +65,6 @@ const ProjectDetail = () => {
                     <ZoomIn className="h-4 w-4" />
                   </span>
                 </button>
-                <figcaption className="p-4 text-sm text-muted-foreground">
-                  {img.caption}
-                </figcaption>
               </figure>
             ))}
           </div>
@@ -85,8 +82,7 @@ const ProjectDetail = () => {
                   className="max-w-full max-h-[80vh] object-contain"
                 />
               </div>
-              <div className="flex items-center justify-between gap-4 p-4 border-t border-border">
-                <p className="text-sm text-muted-foreground">{active.caption}</p>
+              <div className="flex items-center justify-end gap-4 p-4 border-t border-border">
                 <p className="text-xs text-muted-foreground whitespace-nowrap">
                   {(lightboxIndex ?? 0) + 1} / {images.length}
                 </p>
