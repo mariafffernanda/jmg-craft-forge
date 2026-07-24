@@ -24,13 +24,13 @@ const Home = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-primary-foreground">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 uppercase tracking-tight">
-            BUILT IN THE SHOP. INSTALLED ON SITE.
+            SOUTH FLORIDA'S METAL FABRICATION PARTNER
           </h1>
           <p className="text-xl md:text-2xl mb-4 max-w-3xl mx-auto">
-            Structural steel, custom staircases, architectural metalwork, and specialty fabrication — designed, welded, and installed by the JMG crew across South Florida.
+            Structural steel, custom staircases, architectural metalwork, and specialty fabrication. Engineered, welded, and installed by JMG across South Florida.
           </p>
           <p className="text-lg mb-8 text-accent font-semibold">
-            Family-run. Miami-based. Trusted by contractors and architects since day one.
+            Miami-based. Trusted by contractors, architects, and municipalities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="default" className="text-lg px-8">
@@ -50,13 +50,13 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6 uppercase">
-              A South Florida Metal Shop That Actually Answers the Phone
+              Full-Service Metal Fabrication, Built to Spec
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              JMG Custom Metal Shop is a hands-on fabrication team based in Miami. We read the drawings,
-              build in our own shop, and show up to install — from a single custom staircase to a full
-              structural steel package. No middlemen, no runaround: talk directly to the people cutting,
-              welding, and installing your project.
+              JMG Custom Metal Shop is a Miami-based fabrication company serving general contractors,
+              architects, developers, and municipalities across South Florida. From CAD detailing and
+              CNC cutting to welding and field installation, every project is executed in-house by our
+              team, from a single custom staircase to a complete structural steel package.
             </p>
           </div>
         </div>
@@ -124,23 +124,23 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-accent uppercase text-sm font-bold tracking-wide mb-3">
-              <Newspaper className="h-4 w-4" /> Featured by the Sun Sentinel — May 2024
+              <Newspaper className="h-4 w-4" /> Featured by the Sun Sentinel, May 2024
             </div>
             <h2 className="text-3xl md:text-4xl font-bold uppercase mb-4">
-              Sunset Point Park — Signature Red Installation
+              Sunset Point Park: Signature Red Installation
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               JMG completed the custom metal fabrication for the park's signature
-              red installation in Tamarac, FL — a large-scale outdoor project
+              red installation in Tamarac, FL. A large-scale outdoor project
               showcasing complex steel structures with precision, durability, and
               strong visual impact.
             </p>
             <blockquote className="border-l-4 border-accent bg-background/60 px-5 py-4 italic text-muted-foreground text-left mb-6">
               "Explore what's new at 4 South Florida parks: there's a beachside
-              learning trail, observation pier and more" — featuring Tamarac's
+              learning trail, observation pier and more," featuring Tamarac's
               newly opened Sunset Point Park.
               <footer className="not-italic text-sm mt-2 text-foreground/70">
-                — Sun Sentinel, May 14, 2024
+                Sun Sentinel, May 14, 2024
               </footer>
             </blockquote>
             <a
