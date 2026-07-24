@@ -111,12 +111,6 @@ const ProjectDetail = () => {
                   </button>
                 </>
               )}
-              <DialogClose
-                aria-label="Close"
-                className="absolute top-2 right-2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-full p-2"
-              >
-                <X className="h-4 w-4" />
-              </DialogClose>
             </div>
           )}
         </DialogContent>
