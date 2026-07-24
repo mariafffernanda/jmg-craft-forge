@@ -146,7 +146,7 @@ const About = () => {
             <p className="text-lg text-muted-foreground leading-relaxed">
               Led by Jackson Suarez and a seasoned team of fabricators, JMG Custom Metal Shop delivers
               precision metal fabrication built on continuous training and investment in cutting-edge
-              technology — ensuring industry-leading results on every project.
+              technology, ensuring industry-leading results on every project.
             </p>
           </div>
         </div>
