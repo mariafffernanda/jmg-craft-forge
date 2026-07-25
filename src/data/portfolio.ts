@@ -12,6 +12,13 @@ import archColorPanels from "@/assets/portfolio/arch-color-panels.jpg.asset.json
 import archPerfDetail from "@/assets/portfolio/arch-perf-detail.jpg.asset.json";
 import archGreenFrames from "@/assets/portfolio/arch-green-frames.jpg.asset.json";
 import archWoodGate from "@/assets/portfolio/arch-wood-gate.jpg.asset.json";
+import archGateBrownDriveway from "@/assets/portfolio/arch-gate-brown-driveway.jpg.asset.json";
+import archGatePedestrianStone from "@/assets/portfolio/arch-gate-pedestrian-stone.jpg.asset.json";
+import archGateDoublePedestrian from "@/assets/portfolio/arch-gate-double-pedestrian.jpg.asset.json";
+import archGarageColorFramesWide from "@/assets/portfolio/arch-garage-color-frames-wide.jpg.asset.json";
+import archGaragePerfPanelClose from "@/assets/portfolio/arch-garage-perf-panel-close.jpg.asset.json";
+import archGarageGreenFramesTall from "@/assets/portfolio/arch-garage-green-frames-tall.jpg.asset.json";
+import archGaragePerfDetail from "@/assets/portfolio/arch-garage-perf-detail.jpg.asset.json";
 import stairBlack from "@/assets/portfolio/stair-black-exterior.jpg.asset.json";
 import stairShopBlack from "@/assets/portfolio/stair-shop-black.jpg.asset.json";
 import stairWhiteSpiral from "@/assets/portfolio/stair-white-spiral.jpg.asset.json";
@@ -90,6 +97,13 @@ export const portfolio: PortfolioCategory[] = [
       { url: archLouverFacade.url, caption: "Waterfront louver enclosure" },
       { url: archDriveway.url, caption: "Custom driveway gate" },
       { url: archWoodGate.url, caption: "Steel-and-wood entry gate" },
+      { url: archGateBrownDriveway.url, caption: "Slatted steel driveway gate with stone columns" },
+      { url: archGatePedestrianStone.url, caption: "Pedestrian entry gate with stacked-stone columns" },
+      { url: archGateDoublePedestrian.url, caption: "Double pedestrian gate with keypad entry" },
+      { url: archGarageColorFramesWide.url, caption: "Multi-color accent frames, parking garage façade" },
+      { url: archGarageGreenFramesTall.url, caption: "Green accent frames and perforated screens" },
+      { url: archGaragePerfPanelClose.url, caption: "Perforated panel screens, close view" },
+      { url: archGaragePerfDetail.url, caption: "Perforated panel detail" },
       { url: archPerfPanel.url, caption: "Perforated panel façade, parking garage" },
       { url: archColorPanels.url, caption: "Color-accent panels on garage exterior" },
       { url: archPerfDetail.url, caption: "Perforated panel detail" },
