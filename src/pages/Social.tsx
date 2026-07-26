@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
+import BeholdFeed from "@/components/BeholdFeed";
 
 const Social = () => {
   return (
@@ -74,19 +75,8 @@ const Social = () => {
       <section className="py-8 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 uppercase text-center">LATEST FROM INSTAGRAM</h2>
-          <div className="max-w-xl mx-auto bg-background rounded-lg p-8 text-center">
-            <Instagram size={64} className="mx-auto mb-4 text-accent" />
-            <p className="text-muted-foreground mb-6">
-              Follow us on Instagram @jmgcustom to see our latest projects, behind-the-scenes content, and metal fabrication inspiration.
-            </p>
-            <a
-              href="https://instagram.com/jmgcustom"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white rounded-md hover:opacity-90 transition-opacity font-bold"
-            >
-              View on Instagram
-            </a>
+          <div className="max-w-5xl mx-auto">
+            <BeholdFeed />
           </div>
         </div>
       </section>

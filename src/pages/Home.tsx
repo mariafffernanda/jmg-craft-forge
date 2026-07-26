@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper, ExternalLink } from "lucide-react";
 import heroImage from "@/assets/portfolio/struct-jmg-site.jpg.asset.json";
 import { portfolio } from "@/data/portfolio";
+import BeholdFeed from "@/components/BeholdFeed";
 
 const Home = () => {
   const features = [
@@ -187,6 +188,19 @@ const Home = () => {
                 {label}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Feed */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold uppercase mb-2">Latest from Instagram</h2>
+            <p className="text-muted-foreground">Follow @jmgcustom for fresh shop and site photos.</p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <BeholdFeed />
           </div>
         </div>
       </section>
