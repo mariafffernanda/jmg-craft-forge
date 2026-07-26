@@ -5,6 +5,23 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
+      {/* Instagram strip - visible on every page */}
+      <div className="bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white">
+        <div className="container mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+          <Instagram size={28} />
+          <p className="font-bold uppercase tracking-wide text-lg">
+            Follow our latest builds on Instagram
+          </p>
+          <a
+            href="https://instagram.com/jmgcustom"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2 rounded-md bg-white text-[#bc1888] font-bold uppercase hover:opacity-90 transition-opacity"
+          >
+            @jmgcustom
+          </a>
+        </div>
+      </div>
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Contact Info */}
