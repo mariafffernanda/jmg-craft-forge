@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink, Newspaper } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
+import BeholdFeed from "@/components/BeholdFeed";
 
 const Projects = () => {
   return (
