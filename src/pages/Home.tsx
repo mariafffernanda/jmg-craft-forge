@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper, ExternalLink } from "lucide-react";
+import { ArrowRight, CheckCircle, Award, Shield, Clock, Newspaper, ExternalLink, Instagram } from "lucide-react";
 import heroImage from "@/assets/portfolio/struct-jmg-site.jpg.asset.json";
 import { portfolio } from "@/data/portfolio";
 import BeholdFeed from "@/components/BeholdFeed";
@@ -74,6 +74,32 @@ const Home = () => {
                 <p className="text-muted-foreground">{feature.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Feed - prominent, right after intro */}
+      <section className="py-20 bg-background border-y-4 border-accent">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-3 mb-4 px-5 py-2 rounded-full bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white font-bold uppercase tracking-wide text-sm">
+              <Instagram size={20} /> Live from the Shop
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold uppercase mb-3">Follow @jmgcustom</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+              See our latest fabrications, installs, and behind-the-scenes shots. Updated automatically from Instagram.
+            </p>
+            <a
+              href="https://instagram.com/jmgcustom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-md bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white font-bold uppercase hover:opacity-90 transition-opacity"
+            >
+              <Instagram size={20} /> Follow Us on Instagram
+            </a>
+          </div>
+          <div className="max-w-6xl mx-auto">
+            <BeholdFeed />
           </div>
         </div>
       </section>
@@ -188,19 +214,6 @@ const Home = () => {
                 {label}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Instagram Feed */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold uppercase mb-2">Latest from Instagram</h2>
-            <p className="text-muted-foreground">Follow @jmgcustom for fresh shop and site photos.</p>
-          </div>
-          <div className="max-w-5xl mx-auto">
-            <BeholdFeed />
           </div>
         </div>
       </section>
