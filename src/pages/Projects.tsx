@@ -155,6 +155,19 @@ const Projects = () => {
           </div>
         </div>
       </section>
+
+      {/* Instagram Feed */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold uppercase mb-2">More on Instagram</h2>
+            <p className="text-muted-foreground">See our latest builds @jmgcustom.</p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <BeholdFeed />
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
